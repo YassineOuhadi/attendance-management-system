@@ -1,0 +1,29 @@
+package com.inn.attendanceapi.service;
+
+import com.inn.attendanceapi.model.Justification;
+import com.inn.attendanceapi.wrapper.SeanceParticipantWrapper;
+import com.inn.attendanceapi.wrapper.SeanceWrapper;
+import com.inn.attendanceapi.wrapper.UserWrapper;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+import java.util.Map;
+
+public interface SeanceService {
+
+    ResponseEntity<String> addSeance(Map<String, String> requestMap);
+    ResponseEntity<String> addParticipant(Map<String, String> requestMap);
+    ResponseEntity<List<SeanceParticipantWrapper>> getParticipants(Map<String, String> requestMap);
+
+    ResponseEntity<String> validatePresence(Map<String, String> requestMap);
+
+    ResponseEntity<String> justifyAbsence(Map<String, String> requestMap);
+
+    ResponseEntity<String> validateJustification(Map<String, String> requestMap);
+
+    ResponseEntity<Justification> getJustification(Map<String, String> requestMap);
+
+    ResponseEntity<List<SeanceWrapper>> getSeances();
+
+    ResponseEntity<String> deleteSeance(Integer seanceId);
+}

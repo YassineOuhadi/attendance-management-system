@@ -1,0 +1,79 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="8">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <c-alert color="danger"  *ngIf="showError">Login failed . Please check your email and password and try again !</c-alert>
+              <form cForm>
+                <h1>Login</h1>
+                
+                <p class="text-medium-emphasis">Sign In to your account</p>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input autoComplete="email" type="email" cFormControl placeholder="Email"
+                  [(ngModel)]="email" [ngModelOptions]="{standalone: true}" />
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Password"
+                    name="Password"
+                    type="password"
+                    [(ngModel)]="password"
+                    [ngModelOptions]="{standalone: true}"
+                  
+                  />
+                </c-input-group>
+                <c-row>
+                  <c-col xs="6">
+                    <button cButton class="px-4 mb-3" color="primary" (click)="login()">
+                      Login 
+                    </button>
+                  </c-col>
+
+                  <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input autoComplete="email" type="email" cFormControl placeholder="Type Email here if you forget it !"
+                    [(ngModel)]="emailf" [ngModelOptions]="{standalone: true}" />
+                  </c-input-group>
+
+                  <c-col class="text-right" xs="6">
+                    <button cButton class="px-0" color="link" (click)="forgotPass()" >
+                      Forgot password?
+                    </button>
+                    
+                  
+                  </c-col>
+                  <c-alert color="success"  *ngIf="showSuccess">A mail has been sent to your email Please . Check your email for Credentials. !</c-alert>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
+            <c-card-body class="text-center">
+              <div>
+                
+                <h2>Sign In</h2>
+                <img src="assets\images\ENSIAS.png" width="100" height="100" alt="">
+                <p>
+                  <b> Student's Attendance Management System</b>
+                </p>
+        
+              </div>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

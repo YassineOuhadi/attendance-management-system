@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app-api:
+    build:
+      context: ./app-api
+      dockerfile: Dockerfile
+    container_name: app-api
+    environment:
+      - DB_SERVER=attendance-db.c61cjdfm6rpa.us-east-1.rds.amazonaws.com
+      - POSTGRES_DB=Attendance_DB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 9090:9090
+
+  app-ui:
+    build:
+      context: ./app-ui
+      dockerfile: Dockerfile
+    container_name: app-ui
+    ports:
+      - 4200:80
+    links:
+      - app-api
+
+volumes:
+  app-data:

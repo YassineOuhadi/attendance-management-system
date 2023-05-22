@@ -1,0 +1,151 @@
+<button cButton color="dark" class="mb-3" (click)="addUser()">
+  Add professor
+</button>
+<c-modal
+  #addProfessorForm
+  [scrollable]="true"
+  [visible]="displayAddProfessor"
+  alignment="center"
+  id="addProfessorForm"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Add Professor</h5>
+    <button (click)="displayAddProfessor = false" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form cForm class="row g-3">
+      <c-col [md]="6">
+        <label cLabel for="firstName">First Name</label>
+        <input
+          required
+          cFormControl
+          id="firstName"
+          name="firstName"
+          type="text"
+          [(ngModel)]="professor.firstName"
+        />
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel for="lastName">Last Name</label>
+        <input
+          required
+          cFormControl
+          id="lastName"
+          name="lastName"
+          type="text"
+          [(ngModel)]="professor.lastName"
+        />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="password">Password</label>
+        <input
+          required
+          cFormControl
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="professor.password"
+        />
+      </c-col>
+      <c-col [xs]="12">
+        <label cLabel for="email">Email Address</label>
+        <input
+          required
+          cFormControl
+          id="email"
+          name="email"
+          placeholder="johndoe@um5.ac.ma"
+          [(ngModel)]="professor.email"
+          [disabled]="professor.id != null"
+        />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="rfid">RFID Code Number</label>
+        <input
+          required
+          cFormControl
+          id="rfid"
+          type="text"
+          name="rfid"
+          [(ngModel)]="professor.rfid"
+        />
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel for="phone">Contact Number</label>
+        <input
+          cFormControl
+          id="phone"
+          name="phone"
+          [(ngModel)]="professor.contactNumber"
+        />
+      </c-col>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="displayAddProfessor = false" cButton color="secondary">
+      Close
+    </button>
+    <button
+      cButton
+      color="dark"
+      [disabled]="!isValidProfessor()"
+      (click)="saveProfessor()"
+    >
+      Add
+    </button>
+  </c-modal-footer>
+</c-modal>
+<c-modal
+  [scrollable]="true"
+  [visible]="displayConfirmDelete"
+  alignment="center"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Delete Professor</h5>
+    <button (click)="displayConfirmDelete = false" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body> </c-modal-body>
+  <c-modal-footer>
+    <button (click)="displayConfirmDelete = false" cButton color="secondary">
+      Cancel
+    </button>
+    <button cButton color="dark" (click)="deleteProfessor(professor.id)">
+      Delete
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<table cTable>
+  <thead cTableColor="dark">
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">RFID Code Number</th>
+      <th scope="col">Contact Number</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prof of listProfessors">
+      <th scope="row">{{ prof.firstName }}</th>
+      <td>{{ prof.lastName }}</td>
+      <td>{{ prof.email }}</td>
+      <td>{{ prof.rfid }}</td>
+      <td>{{ prof.contactNumber }}</td>
+      <td>
+        <button cButton class="m-2" color="dark" (click)="editProfessor(prof)">
+          Edit
+        </button>
+        <button
+          cButton
+          class="m-2"
+          color="dark"
+          (click)="displayConfirmDelete = true; professor = prof"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

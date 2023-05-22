@@ -1,0 +1,93 @@
+<button cButton color="dark" class="mb-3" (click)="addSeance()">
+  Add seance
+</button>
+
+<div class="control-section">
+  <div class="content-wrapper">
+    <ejs-schedule
+      #schedule
+      height="650px"
+      [(selectedDate)]="selectedDate"
+      [eventSettings]="eventSettings"
+      currentView="Week"
+      (popupOpen)="onPopupOpen($event)"
+      (actionBegin)="onActionBegin($event)"
+    >
+      <ng-template #eventSettingsTemplate let-data>
+        <div>
+          <div class="subject">{{ data.Subject }}</div>
+          <div class="time">
+            Time: {{ data.StartTime.toISOString() }} -
+            {{ data.EndTime.toISOString() }}
+          </div>
+        </div>
+      </ng-template>
+    </ejs-schedule>
+  </div>
+</div>
+
+<c-modal
+  #addStudentForm
+  [scrollable]="true"
+  [visible]="displayAddSeance"
+  alignment="center"
+  id="addSSeanceForm"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Add Seance</h5>
+    <button (click)="displayAddSeance = false" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form cForm class="row g-3">
+      <c-col [md]="6">
+        <label cLabel for="type">Type</label>
+        <select
+          aria-label="Select seance type"
+          cSelect
+          [(ngModel)]="selectedSeance.type"
+          name="type"
+        >
+          <option [value]="'COURSE'">COURSE</option>
+          <option [value]="'TD'">TD</option>
+          <option [value]="'TP'">TP</option>
+          <option [value]="'EXAMEN'">EXAMEN</option>
+        </select>
+      </c-col>
+
+      <c-col [md]="6">
+        <label cLabel for="salle">Salle</label>
+        <select
+          aria-label="Salle"
+          name="salle"
+          cSelect
+          [(ngModel)]="selectedSeance.salle_id"
+        >
+          <option *ngFor="let salle of listSalle" [value]="salle.id">
+            {{ salle.name }}
+          </option>
+        </select>
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel for="startDate">startDate</label>
+        <ejs-datetimepicker
+          [(ngModel)]="startDateValue"
+          name="start"
+          [value]="startDateValue"
+        ></ejs-datetimepicker>
+      </c-col>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="displayAddSeance = false" cButton color="secondary">
+      Close
+    </button>
+    <button
+      cButton
+      color="dark"
+      [disabled]="!isValidSeance()"
+      (click)="saveSeance()"
+    >
+      Add
+    </button>
+  </c-modal-footer>
+</c-modal>
