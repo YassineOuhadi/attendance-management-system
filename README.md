@@ -1,4 +1,4 @@
-Angular, Spring-Boot and Docker
+Angular, Spring-Boot & Docker
 
 Sample project to demonstrate usage of Docker and docker-compose for development and testing of a Java Spring Boot and Angular project.
 
